@@ -1,15 +1,81 @@
 {
-  "norm_version": "1.0",
-  "project_name": "caw.cp",
-  "extends": "https://github.com/acme-foundation/acme.git#v3.2.0",
-  "active_norm_scopes": [
-    "norms/core/*",
-    "norms/domain/ingestion/*",
-    "norms/procedural/*"
-  ],
-  "upstream_dispatch": {
-    "remote": "origin",
-    "branch_template": "cases/{project_name}/CAS_{hex3}_{slug}",
-    "auto_dispatch": true
-  }
+    "norm_version":  "1.0",
+    "project_name":  "caw.cp",
+    "extends":  "https://github.com/acme-foundation/acme.git#v3.2.0",
+    "active_norm_scopes":  [
+                               "norms/core/*",
+                               "norms/domain/ingestion/*",
+                               "norms/procedural/*"
+                           ],
+    "upstream_dispatch":  {
+                              "remote":  "origin",
+                              "branch_template":  "cases/{project_name}/CAS_{hex3}_{slug}",
+                              "auto_dispatch":  true
+                          },
+    "invariants":  [
+                       {
+                           "invariant_id":  "INV-DATA-PLANE-PURITY-01",
+                           "dof":  0,
+                           "scope":  "../caw/*",
+                           "doctrine":  "Strict Clean-Room Runtime Isolation",
+                           "allowed_topology":  {
+                                                    "directories":  [
+                                                                        "assets",
+                                                                        "src",
+                                                                        "tools",
+                                                                        "scripts",
+                                                                        ".vscode",
+                                                                        ".tmp"
+                                                                    ],
+                                                    "root_files":  [
+                                                                       "index.html",
+                                                                       "package.json",
+                                                                       "README.md",
+                                                                       ".gitignore"
+                                                                   ]
+                                                },
+                           "prohibited_artifacts":  [
+                                                        "*.norm",
+                                                        "verify.py",
+                                                        "solution.md",
+                                                        "cases/*",
+                                                        "specs/*",
+                                                        "pipelines/*"
+                                                    ],
+                           "enforcement":  "REJECT_ON_CONTAMINATION"
+                       }
+                   ],
+    "local_invariants":  {
+                             "INV-DATA-PLANE-PURITY-01":  {
+                                                              "invariant_id":  "INV-DATA-PLANE-PURITY-01",
+                                                              "dof":  0,
+                                                              "scope":  "../caw/*",
+                                                              "doctrine":  "Strict Clean-Room Runtime Isolation",
+                                                              "allowed_topology":  {
+                                                                                       "directories":  [
+                                                                                                           "assets",
+                                                                                                           "src",
+                                                                                                           "tools",
+                                                                                                           "scripts",
+                                                                                                           ".vscode",
+                                                                                                           ".tmp"
+                                                                                                       ],
+                                                                                       "root_files":  [
+                                                                                                          "index.html",
+                                                                                                          "package.json",
+                                                                                                          "README.md",
+                                                                                                          ".gitignore"
+                                                                                                      ]
+                                                                                   },
+                                                              "prohibited_artifacts":  [
+                                                                                           "*.norm",
+                                                                                           "verify.py",
+                                                                                           "solution.md",
+                                                                                           "cases/*",
+                                                                                           "specs/*",
+                                                                                           "pipelines/*"
+                                                                                       ],
+                                                              "enforcement":  "REJECT_ON_CONTAMINATION"
+                                                          }
+                         }
 }
